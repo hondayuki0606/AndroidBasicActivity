@@ -11,15 +11,7 @@ class CustomApplication: Application() {
         Realm.init(this)
 
         // 設定
-        val config = RealmConfiguration.Builder()
-            .name("myrealm.realm")
-            .encryptionKey(getMyKey())
-            .schemaVersion(42)
-            .modules(MySchemaModule())
-            .migration(MyMigration())
-            .readOnly()
-            .inMemory()
-            .build()
+        val config = RealmConfiguration.Builder().build()
         Realm.setDefaultConfiguration(config)
     }
 }
