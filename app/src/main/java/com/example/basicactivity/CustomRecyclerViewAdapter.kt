@@ -1,5 +1,15 @@
 package com.example.basicactivity
 
+import android.graphics.Color
+import android.text.format.DateFormat
+import android.view.LayoutInflater
+import androidx.recyclerview.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import io.realm.RealmResults
+import kotlinx.android.synthetic.main.one_result.view.*
+
 class CustomRecyclerViewAdapter(realmResults: RealmResults<BloodPress>) :
 RecyclerView.Adapter<ViewHolder>() {
     private val rResults: RealmResults<BloodPress> = realmResults
@@ -7,7 +17,7 @@ RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder{
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.one_result, parent, false)
-        val viewholder = VireHolder(view)
+        val viewholder = ViewHolder(view)
         return viewholder
     }
 
@@ -16,6 +26,11 @@ RecyclerView.Adapter<ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, postion: Int) {
+        val bloodPress = rResults[postion]
+        holder.dataText?.text = DateFormat.format("yyy/MM/dd", bloodPress?.dateTime)
+        holder.minMaxText?.text = "${bloodPress?.max.toString()}/${bloodPress?.min.toString()}"
+        holder.pulseText?.text = bloodPress?.pulse.toString()
+        holder.itemView.setBackgroundColor(if (postion % 2 == 0) Color.LTGRAY else Color.WHITE)
 
     }
 }
