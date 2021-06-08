@@ -1,5 +1,6 @@
 package com.example.basicactivity
 
+import android.content.Intent
 import android.graphics.Color
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -31,6 +32,9 @@ RecyclerView.Adapter<ViewHolder>() {
         holder.minMaxText?.text = "${bloodPress?.max.toString()}/${bloodPress?.min.toString()}"
         holder.pulseText?.text = bloodPress?.pulse.toString()
         holder.itemView.setBackgroundColor(if (postion % 2 == 0) Color.LTGRAY else Color.WHITE)
-
+        holder.itemView.setOnClickListener{
+            val intent = Intent(it.context,EditActivity::class.java)
+            intent.putExtra("id",bloodPress?.id)
+        }
     }
 }
