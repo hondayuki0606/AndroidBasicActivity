@@ -28,13 +28,14 @@ RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, postion: Int) {
         val bloodPress = rResults[postion]
-        holder.dataText?.text = DateFormat.format("yyy/MM/dd", bloodPress?.dateTime)
+        holder.dataText?.text = DateFormat.format("yyyy/MM/dd　kk:mm", bloodPress?.dateTime)
         holder.minMaxText?.text = "${bloodPress?.max.toString()}/${bloodPress?.min.toString()}"
         holder.pulseText?.text = bloodPress?.pulse.toString()
         holder.itemView.setBackgroundColor(if (postion % 2 == 0) Color.LTGRAY else Color.WHITE)
         holder.itemView.setOnClickListener{
             val intent = Intent(it.context,EditActivity::class.java)
             intent.putExtra("id",bloodPress?.id)
+            it.context.startActivity(intent)
         }
     }
 }

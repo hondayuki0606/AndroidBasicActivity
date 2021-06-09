@@ -37,6 +37,15 @@ class EditActivity : AppCompatActivity() {
             var min: Long = 0
             var pulse: Long = 0
 
+            if(!maxEdit.text.isNullOrEmpty()){
+                max = maxEdit.text.toString().toLong()
+            }
+            if(!minEdit.text.isNullOrEmpty()){
+                min = minEdit.text.toString().toLong()
+            }
+            if(!pulseEdit.text.isNullOrEmpty()){
+                pulse = pulseEdit.text.toString().toLong()
+            }
             when (bpId) {
                 0L -> {
                     realm.executeTransaction {
@@ -67,7 +76,6 @@ class EditActivity : AppCompatActivity() {
                         bloodPress?.min = min
                         bloodPress?.pulse = pulse
                     }
-
                 }
             }
             Toast.makeText(applicationContext, "保存しました", Toast.LENGTH_SHORT).show()
