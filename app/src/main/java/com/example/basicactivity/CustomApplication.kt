@@ -11,7 +11,14 @@ class CustomApplication: Application() {
         Realm.init(this)
 
         // 設定
-        val config = RealmConfiguration.Builder().build()
+        val config = RealmConfiguration.Builder()
+                .build()
+        // モデルクラスを変更しようとしたときにNeededを使用するとExceptionを回避し、データベースを削除してくれる
+//        val config = RealmConfiguration.Builder()
+//                .deleteRealmIfMigrationNeeded()
+//                .build()
+        // 全件削除
+//        Realm.deleteRealm(config)
         Realm.setDefaultConfiguration(config)
     }
 }
